@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -7,30 +7,46 @@ public class PlayerCollision : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = FindAnyObjectByType<GameManager>();  
+        gameManager = FindAnyObjectByType<GameManager>();
         audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Kiểm tra gameManager và audioManager có tồn tại không
+        if (gameManager == null)
+        {
+            gameManager = FindAnyObjectByType<GameManager>();
+        }
+        if (audioManager == null)
+        {
+            audioManager = FindAnyObjectByType<AudioManager>();
+        }
+
+        // Kiểm tra va chạm với Coin
         if (collision.CompareTag("Coin"))
         {
             Destroy(collision.gameObject);
-            audioManager.PlayCoinSound();
-            gameManager.AddScore(1);
+            if (audioManager != null) audioManager.PlayCoinSound();
+            if (gameManager != null) gameManager.AddScore(1);
         }
+        // Kiểm tra va chạm với Trap
         else if (collision.CompareTag("Trap"))
         {
-            gameManager.GameOver();
+            PlayerHealth ph = FindFirstObjectByType<PlayerHealth>();
+            if (ph != null) ph.TakeDamage(1);
         }
+        // Kiểm tra va chạm với Enemy
         else if (collision.CompareTag("Enemy"))
         {
-            gameManager.GameOver();
+            PlayerHealth ph = FindFirstObjectByType<PlayerHealth>();
+            if (ph != null) ph.TakeDamage(1);
         }
+        // Kiểm tra va chạm với Key
         else if (collision.CompareTag("Key"))
         {
             Destroy(collision.gameObject);
-            gameManager.GameWin();
+            if (gameManager != null) gameManager.GameWin();
         }
     }
 }

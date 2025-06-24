@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,7 +8,23 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip backgroundClip;
     [SerializeField] private AudioClip jumpClip;
     [SerializeField] private AudioClip coinClip;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private static AudioManager instance;
+
+    private void Awake()
+    {
+        // Đảm bảo chỉ có một instance
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // Hủy bản sao thừa
+        }
+    }
+
     void Start()
     {
         PlayBackgroundMusic();
@@ -16,17 +32,26 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBackgroundMusic()
     {
-        backgroundAudioSource.clip = backgroundClip;
-        backgroundAudioSource.Play();               
+        if (backgroundAudioSource != null && backgroundClip != null)
+        {
+            backgroundAudioSource.clip = backgroundClip;
+            backgroundAudioSource.Play();
+        }
     }
 
     public void PlayCoinSound()
     {
-        effectAudioSource.PlayOneShot(coinClip);
+        if (effectAudioSource != null && coinClip != null)
+        {
+            effectAudioSource.PlayOneShot(coinClip);
+        }
     }
 
     public void PlayJumpSound()
     {
-        effectAudioSource.PlayOneShot(jumpClip);
+        if (effectAudioSource != null && jumpClip != null)
+        {
+            effectAudioSource.PlayOneShot(jumpClip);
+        }
     }
 }

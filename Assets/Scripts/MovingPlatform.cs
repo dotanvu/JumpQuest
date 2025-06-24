@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -6,14 +6,12 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Transform pointB;
     [SerializeField] private float speed = 2f;
     private Vector3 target;
-    private Transform player;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         target = pointA.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
@@ -38,7 +36,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    private void OnCollisionQuit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision) // Sửa lỗi đánh máy
     {
         if (collision.gameObject.CompareTag("Player"))
         {
