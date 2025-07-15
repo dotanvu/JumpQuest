@@ -63,12 +63,19 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\SpawnPlayer.cs" />
     <Compile Include="Assets\Scripts\PauseController.cs" />
+    <Compile Include="Assets\Scripts\CoinManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadBootstrap.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CheckpointPlatform.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerCollision.cs" />
+    <Compile Include="Assets\Scripts\SceneDataLoader.cs" />
+    <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\SceneLoadManager.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\MovingPlatform.cs" />

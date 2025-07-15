@@ -50,6 +50,12 @@ public class PauseController : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1;
+
+        // Reset hoàn toàn cho game mới
+        ResetForNewGame();
+
+        Debug.Log("PauseController RestartGame: Complete reset for new game");
+
         SceneManager.LoadScene("Game");
     }
 
@@ -58,5 +64,40 @@ public class PauseController : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
+    }
+
+    public void SaveGame()
+    {
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.SaveGame();
+        }
+    }
+
+    public void SaveAndGoToMenu()
+    {
+        SaveGame();
+        isPaused = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
+
+    private void ResetForNewGame()
+    {
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.ResetForNewGame();
+        }
+        else
+        {
+            if (SaveSystem.Instance != null)
+            {
+                SaveSystem.Instance.DeleteSave();
+            }
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+        }
     }
 }

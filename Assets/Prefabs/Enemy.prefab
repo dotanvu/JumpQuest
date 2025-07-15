@@ -172,3 +172,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   distance: 2
+  deathDelay: 0.6
+  groundCheckDistance: 0.6
+  wallCheckDistance: 0.3
+  stepHeight: 0.5
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  fallOffThreshold: -30
+  resetOnFallOff: 0
+  fallOffCheckInterval: 0.5

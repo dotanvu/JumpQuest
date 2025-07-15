@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
 
+
+
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -47,22 +49,12 @@ public class PlayerHealth : MonoBehaviour
         {
             if (currentHealth > 0)
             {
+                // Chỉ teleport về checkpoint nếu có, không về startpoint
                 if (gm.hasCheckpoint)
                 {
                     gm.player.position = gm.checkpointPosition;
                 }
-                else
-                {
-                    if (startPoint != null)
-                    {
-                        gm.player.position = startPoint.position;
-                    }
-                    else
-                    {
-                        Debug.LogWarning("StartPoint chưa gán!");
-                        gm.player.position = new Vector3(0, 0, 0);
-                    }
-                }
+                // Nếu chưa có checkpoint, nhân vật ở nguyên vị trí hiện tại
             }
             else
             {
@@ -108,4 +100,17 @@ public class PlayerHealth : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public void SetHealth(int health)
+    {
+        currentHealth = Mathf.Clamp(health, 0, maxHealth);
+        UpdateHearts();
+    }
+
+
 }

@@ -24,6 +24,9 @@ public class CheckpointPlatform : MonoBehaviour
                 else if (gameObject.CompareTag("Checkpoint"))
                 {
                     gameManager.SetCheckpoint(transform.position);
+
+                    // Auto-save khi đạt checkpoint
+                    gameManager.SaveGame();
                 }
             }
         }
